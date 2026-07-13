@@ -7,6 +7,10 @@ BASE_DIR = os.path.dirname(__file__)
 DEV_SRC = os.path.join(BASE_DIR, '5.Project Development Phase')
 if DEV_SRC not in sys.path:
     sys.path.insert(0, DEV_SRC)
+
+# Point Flask at the templates/static located in the development phase folder
+TEMPLATE_DIR = os.path.join(DEV_SRC, 'templates')
+STATIC_DIR = os.path.join(DEV_SRC, 'static')
 from src.predict import predict_from_input
 from src.utils import init_db, save_prediction, get_recent_predictions
 import json
@@ -14,7 +18,7 @@ import json
 BASE_DIR = os.path.dirname(__file__)
 DB_PATH = os.path.join(BASE_DIR, 'predictions.db')
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "change-me-in-production")
 
 init_db(DB_PATH)
