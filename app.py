@@ -1,5 +1,12 @@
 import os
+import sys
 from flask import Flask, render_template, request, redirect, url_for, flash
+
+# Ensure the development subfolder with the `src` package is on sys.path
+BASE_DIR = os.path.dirname(__file__)
+DEV_SRC = os.path.join(BASE_DIR, '5.Project Development Phase')
+if DEV_SRC not in sys.path:
+    sys.path.insert(0, DEV_SRC)
 from src.predict import predict_from_input
 from src.utils import init_db, save_prediction, get_recent_predictions
 import json
