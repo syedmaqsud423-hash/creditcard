@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Dashboard</h3>
+  <a class="btn btn-primary" href="/">Back to Home</a>
+</div>
+<div class="row mb-4">
+  <div class="col-md-4"><div class="card p-3"><h5>Total</h5><h3>{{total}}</h3></div></div>
+  <div class="col-md-4"><div class="card p-3"><h5>Approved</h5><h3>{{approved}}</h3></div></div>
+  <div class="col-md-4"><div class="card p-3"><h5>Rejected</h5><h3>{{rejected}}</h3></div></div>
+</div>
+<h5>Recent Predictions</h5>
+<table class="table table-striped">
+  <thead><tr><th>ID</th><th>Name</th><th>Decision</th><th>Prob</th><th>When</th></tr></thead>
+  <tbody>
+    {% for r in recent %}
+      <tr><td>{{r[0]}}</td><td>{{r[1]}}</td><td>{{r[2]}}</td><td>{{'%.2f'|format(r[3]*100) ~ '%'}} </td><td>{{r[4]}}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
